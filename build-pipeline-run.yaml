@@ -1,7 +1,7 @@
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: reverse-words-build-pipeline-run-
+  generateName: reversewords-build-pipeline-run-
 spec:
   pipelineRef:
     name: reverse-words-build-pipeline
@@ -10,11 +10,8 @@ spec:
       serviceAccountName: reversewords-pipeline
   params:
     - name: imageTag
-      value: "testing"
-  resources:
-    - name: app-git
-      resourceRef:
-        name: reverse-words-git
-    - name: app-image
-      resourceRef:
-        name: reverse-words-image
+      value: $(params.git-revision)
+  workspaces:
+    - name: reverse-words-git
+      persistentVolumeClaim:
+          claimName: tekton-workspace
