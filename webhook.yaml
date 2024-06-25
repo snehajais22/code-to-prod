@@ -17,9 +17,9 @@ spec:
       spec:
         pipelineRef:
           name: reverse-words-build-pipeline
-        serviceAccountNames:
-          - taskName: build-and-push
-            serviceAccountName: reversewords-pipeline
+        taskRunSpecs:
+          - pipelineTaskName: build-and-push
+            taskServiceAccountName: reversewords-pipeline
         params:
           - name: imageTag
             value: $(params.git-revision)
@@ -28,17 +28,6 @@ spec:
             persistentVolumeClaim:
                 claimName: tekton-workspace
 
-# ---
-# apiVersion: tekton.dev/v1alpha1
-# kind: TriggerBinding
-# metadata:
-#   name: github-triggerbinding
-# spec:
-#   params:
-#     - name: gitrevision
-#       value: $(body.head_commit.id)
-#     - name: gitrepositoryurl
-#       value: $(body.repository.url)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener

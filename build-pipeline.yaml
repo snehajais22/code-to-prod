@@ -40,6 +40,8 @@ spec:
         value: --verbose
       - name: GOOS
         value: "linux"
+      - name: version
+        value: "v1.59.1"
     workspaces:
       - name: source
         workspace: reverse-words-git
@@ -60,16 +62,18 @@ spec:
 
   - name: build-and-push
     taskRef:
-      name: build-from-dockerfile
+      name: buildah
     runAfter:
       - test
     params:
-      - name: DOCKERFILE_PATH
-        value: "./Dockerfile"
-      - name: IMAGE_URL
-        value: "$(params.imageUrl)"
-      - name: IMAGE_TAG
-        value: "$(params.imageTag)"
+      - name: DOCKERFILE
+        value: ./Dockerfile
+      - name: IMAGE
+        value: $(params.imageUrl)
+      - name: TLSVERIFY
+        value: 'false'
+      - name: CONTEXT
+        value: .
     workspaces:
       - name: source
         workspace: reverse-words-git

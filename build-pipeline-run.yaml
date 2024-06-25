@@ -5,9 +5,9 @@ metadata:
 spec:
   pipelineRef:
     name: reverse-words-build-pipeline
-  serviceAccountNames:
-    - taskName: build-and-push
-      serviceAccountName: reversewords-pipeline
+  taskRunSpecs:
+    - pipelineTaskName: build-and-push
+      taskServiceAccountName: reversewords-pipeline
   params:
     - name: imageTag
       value: $(params.git-revision)
