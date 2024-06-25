@@ -1,5 +1,6 @@
 bases:
 - github.com/snehajais22/code-to-prod?ref=config
 - namespace.yaml
+- route.yaml
 patchesStrategicMerge:
 - deployment.yaml
