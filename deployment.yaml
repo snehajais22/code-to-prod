@@ -12,5 +12,5 @@ spec:
         image: quay.io/snehajaiswal22/tekton-reversewords:latest
         env:
         - name: RELEASE
-          value: "Stage Release"
+          value: "Hello World"
         - $patch: replace
