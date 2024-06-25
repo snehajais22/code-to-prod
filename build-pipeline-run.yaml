@@ -10,7 +10,7 @@ spec:
       taskServiceAccountName: reversewords-pipeline
   params:
     - name: imageTag
-      value: $(params.git-revision)
+      value: latest
   workspaces:
     - name: reverse-words-git
       persistentVolumeClaim:
